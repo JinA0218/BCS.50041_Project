@@ -3,6 +3,9 @@ store/plots/
 store/results/
 store/models/mM*
 store/models/gM*
+store/
+store/models/
+
 
 .env
 __pycache__/
