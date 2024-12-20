@@ -305,7 +305,7 @@ class AutoEncoder(ContinualLearner):
 
 
     ##------ SAMPLE FUNCTIONS --------##
-
+    # JINA : <1> how the number of classes affect the performance - modify y_used
     def sample(self, size, allowed_classes=None, class_probs=None, sample_mode=None, allowed_domains=None,
                only_x=False, **kwargs):
         '''Generate [size] samples from the model. Outputs are tensors (not "requiring grad"), on same device as <self>.
@@ -328,7 +328,16 @@ class AutoEncoder(ContinualLearner):
             if sample_mode is None:
                 if (allowed_classes is None and class_probs is None) or (not self.per_class):
                     # -randomly sample modes from all possible modes (and find their corresponding class, if applicable)
-                    sampled_modes = np.random.randint(0, self.n_modes, size)
+                    # BIR.add_argument('--per-class', action='store_true', help="if selected, each class has own modes")
+                    # BIR.add_argument('--n-modes', type=int, default=1, help="how many modes for prior (per class)? (def=1)")
+                    # JINA :
+                    # self.per_class = per_class
+                    # self.n_modes = n_modes*classes if self.per_class else n_modes
+                    # self.modes_per_class = n_modes if self.per_class else None
+                    # [batch_size_replay] <int>, number of samples to replay per batch
+                    # if scenario==task, batch_size_replay_to_use = int(np.ceil(batch_size_replay / (task-1)))
+                    # else, batch_size_replay
+                    sampled_modes = np.random.randint(0, self.n_modes, size) # size : how many to sample in total
                     y_used = np.array(
                         [int(mode / self.modes_per_class) for mode in sampled_modes]
                     ) if self.per_class else None
@@ -388,8 +397,8 @@ class AutoEncoder(ContinualLearner):
         # decode z into image X
         with torch.no_grad():
             X = self.decode(z, gate_input=(task_used if self.dg_type=="task" else y_used) if self.dg_gates else None)
-
-        # return samples as [batch_size]x[channels]x[image_size]x[image_size] tensor, plus requested additional info
+        
+        
         return X if only_x else (X, y_used, task_used)
 
 

@@ -58,9 +58,9 @@ def train(model, train_loader, iters, loss_cbs=list(), eval_cbs=list(), save_eve
 
 
 
-def train_cl(model, train_datasets, replay_mode="none", scenario="task", rnt=None, classes_per_task=None,
+def train_cl(model, train_datasets, test_datasets=None, replay_mode="none", scenario="task", rnt=None, classes_per_task=None,
              iters=2000, batch_size=32, batch_size_replay=None, loss_cbs=list(), eval_cbs=list(), sample_cbs=list(),
-             generator=None, gen_iters=0, gen_loss_cbs=list(), feedback=False, reinit=False, args=None, only_last=False):
+             generator=None, gen_iters=0, gen_loss_cbs=list(), feedback=False, reinit=False, args=None, only_last=False, get_initial_acc=False):
     '''Train a model (with a "train_a_batch" method) on multiple tasks, with replay-strategy specified by [replay_mode].
 
     [model]             <nn.Module> main model to optimize across all tasks
@@ -98,6 +98,11 @@ def train_cl(model, train_datasets, replay_mode="none", scenario="task", rnt=Non
                 model.register_buffer('{}_SI_prev_task'.format(n), p.detach().clone())
 
     # Loop over all tasks.
+    
+    if get_initial_acc:
+        assert test_datasets is not None
+        initial_accs = []
+    
     for task, train_dataset in enumerate(train_datasets, 1):
 
         # If offline replay-setting, create large database of all tasks so far
@@ -212,6 +217,7 @@ def train_cl(model, train_datasets, replay_mode="none", scenario="task", rnt=Non
                 ) else False
 
                 # Sample [x_]
+                # JINA : <1> how the number of classes affect the performance
                 if conditional_gen and scenario=="task":
                     # -if a conditional generator is used with task-IL scenario, generate data per previous task
                     x_ = list()
@@ -384,3 +390,18 @@ def train_cl(model, train_datasets, replay_mode="none", scenario="task", rnt=Non
             previous_generator = previous_model if feedback else copy.deepcopy(generator).eval()
         elif replay_mode=='current':
             Current = True
+        
+        from eval import evaluate
+        
+        if get_initial_acc:
+            init_acc_per_task = evaluate.validate(
+                model, test_datasets[task-1], verbose=False, test_size=None, task=task,
+                allowed_classes=list(range(classes_per_task*(task-1), classes_per_task*task)) if args.scenario=="task" else None
+            )
+            initial_accs.append(init_acc_per_task)
+            initial_average_accs = sum(initial_accs)/args.tasks
+            
+            print('>> initial_accs ', initial_accs)
+            print('>> initial_average_accs ', initial_average_accs)
+        
+    return initial_accs, initial_average_accs

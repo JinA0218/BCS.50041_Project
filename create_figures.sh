@@ -19,9 +19,9 @@
 # - hyperparameter gridsearch
 ./compare_permMNIST100_hyperParams.py --seed=11                          #--> Fig. S2
 # - compare methods
-./compare_permMNIST100.py --seed=12 --n-seeds=5                          #--> Fig. 6
+./compare_permMNIST100.py --seed=12 --n-seeds=5                          #--> Fig. 6 ** Fig 5?
 # - addition- and ablation-experiments
-./compare_permMNIST100_bir.py --seed=12 --n-seeds=5                      #--> Fig. 8A
+./compare_permMNIST100_bir.py --seed=12 --n-seeds=5                      #--> Fig. 8A *
 
 
 ## Split CIFAR-100 (task- and class-incremental learning)
@@ -32,13 +32,13 @@
 ./compare_CIFAR100_hyperParams.py --scenario=task --convE-ltag=e100 --seed=11       #--> Fig. S3 (top)
 ./compare_CIFAR100_hyperParams.py --scenario=class --convE-ltag=e100 --seed=11      #--> Fig. S3 (bottom)
 # - compare methods
-./compare_CIFAR100.py --scenario=task --convE-ltag=e100 --seed=12 --n-seeds=10      #--> Fig. 7B
-./compare_CIFAR100.py --scenario=class --convE-ltag=e100 --seed=12 --n-seeds=10     #--> Fig. 7C
+./compare_CIFAR100.py --scenario=task --convE-ltag=e100 --seed=12 --n-seeds=10      #--> Fig. 7B **
+./compare_CIFAR100.py --scenario=class --convE-ltag=e100 --seed=12 --n-seeds=10     #--> Fig. 7C **
 # - train an embedding network ("f20") on CIFAR-100 for evaluating generator performance
 ./main_pretrain.py --experiment=CIFAR100 --epochs=20 --augment --pre-convE --convE-ltag=e100 --freeze-convE --full-stag=f20
 # - addition- and ablation-experiments
-./compare_CIFAR100_bir.py --scenario=task --convE-ltag=e100 --seed=12 --n-seeds=10   #--> Fig. 8B
-./compare_CIFAR100_bir.py --scenario=class --convE-ltag=e100 --seed=12 --n-seeds=10  #--> Fig. 8C
+./compare_CIFAR100_bir.py --scenario=task --convE-ltag=e100 --seed=12 --n-seeds=10   #--> Fig. 8B *
+./compare_CIFAR100_bir.py --scenario=class --convE-ltag=e100 --seed=12 --n-seeds=10  #--> Fig. 8C *
 # - analysis of quality replay
 ./compare_CIFAR100_bir.py --scenario=class --convE-ltag=e100 --seed=12 --n-seeds=10 --eval-gen --eval-tag=f20 #--> Fig. 9
 

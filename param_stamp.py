@@ -32,7 +32,7 @@ def get_param_stamp_from_args(args):
 
 
 
-def get_param_stamp(args, model_name, verbose=True, replay=False, replay_model_name=None):
+def get_param_stamp(args, model_name, verbose=True, replay=False, replay_model_name=None, batch_replay_n=None, internal_replay_off=None):
     '''Based on the input-arguments, produce a "parameter-stamp".'''
 
     # -for task
@@ -131,6 +131,12 @@ def get_param_stamp(args, model_name, verbose=True, replay=False, replay_model_n
         recon_stamp, "-s{}".format(args.seed) if not args.seed==0 else "",
     )
 
+    # if batch_replay_n is not None:
+    #     param_stamp += '_brn{}'.format(batch_replay_n)
+        
+    if internal_replay_off:
+        param_stamp += '_nI{}'.format(internal_replay_off)
+    
     ## Print param-stamp on screen and return
     if verbose:
         print(param_stamp)

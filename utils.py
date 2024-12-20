@@ -8,6 +8,22 @@ from models.fc import excitability_modules as em
 
 ##-------------------------------------------------------------------------------------------------------------------##
 
+### SAVE
+
+def save_acc(file_name, acc, ave_acc, evaluated_method, seed_list):
+    # Specify the folder and file path
+    folder_path = "./store/acc/"
+    file_path = os.path.join(folder_path, file_name)
+
+    # Create the folder if it doesn't exist
+    os.makedirs(folder_path, exist_ok=True)
+    data = {'acc': acc, 'ave_acc': ave_acc, 'evaluated_method': evaluated_method, 'seed_list': seed_list}
+    torch.save(data, file_path+'.pth')
+    
+    # Save the dictionary to a JSON file
+    # with open(file_path, "w") as json_file:
+    #     json.dump({'acc': acc, 'ave_acc': ave_acc, 'evaluated_method': evaluated_method, 'seed_list': seed_list}, json_file)
+
 ######################
 ## Random utilities ##
 ######################
