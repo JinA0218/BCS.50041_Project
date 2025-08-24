@@ -4,7 +4,7 @@ Official implementation of **_Teaching AI to Remember: Brain-Inspired Replay for
 
 ## Overview
 
-![catastrophic_forgetting](img/catastrophic_forgetting.jpeg)
+![catastrophic_forgetting](img/catastrophic_forgetting.png)
 
 Artificial neural networks (ANNs) excel at learning from large datasets but still suffer from **catastrophic forgetting**—the loss of previously learned knowledge when adapting to new tasks. Inspired by the **memory replay mechanisms** in the human brain, this project investigates the effectiveness of **internal replay** for **long-term memory in AI**.  
 
