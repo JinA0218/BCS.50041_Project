@@ -82,8 +82,8 @@ We evaluate the following variants:
 
 4. **Trade-Off Observed**
 
-   - **BIR + SI (w/ IR)** achieves the best long-term stability.  
-   - **BIR (w/o IR)** achieves the best short-term plasticity.  
+- **BIR + SI (w/ IR)** achieves the best long-term stability.  
+- **BIR (w/o IR)** achieves the best short-term plasticity.  
 
 ---
 
