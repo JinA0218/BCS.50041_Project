@@ -4,7 +4,7 @@ Official implementation of **_Teaching AI to Remember: Brain-Inspired Replay for
 
 ## Overview
 
-![catastrophic forgetting](img/catastrophic forgetting.png)
+![catastrophic_forgetting](img/catastrophic_forgetting.jpeg)
 
 Artificial neural networks (ANNs) excel at learning from large datasets but still suffer from **catastrophic forgetting**—the loss of previously learned knowledge when adapting to new tasks. Inspired by the **memory replay mechanisms** in the human brain, this project investigates the effectiveness of **internal replay** for **long-term memory in AI**.  
 
@@ -18,7 +18,7 @@ Using **CIFAR-100** in a **class-incremental learning (class-IL)** setting, we p
 
 Humans preserve long-term memories through **neural replay**, where patterns of past experiences are reactivated during learning and consolidation. Inspired by this, recent works (e.g., Van de Ven et al. 2020) proposed **brain-inspired replay mechanisms** to improve AI’s continual learning ability.  
 
-![brain_inspired](img/brain_inspired.png)
+![brain_inspired_continual_learning](img/brain_inspired_continual_learning.png)
 
 In particular, **Van de Ven et al. (2020)** introduced a *Brain-Inspired Replay (BIR)* framework, which extends generative replay by incorporating several biologically motivated components:
 - **Replay through feedback**: integrates hippocampal-like generators with cortical-like main models.  
@@ -64,19 +64,23 @@ We evaluate the following variants:
 
 ![reten_forgetting](img/reten_forgetting.png)
 
-   - Internal replay (IR) improves **retention ratio** and reduces **forgetting score**, especially when combined with SI.  
+   - Internal replay (IR) improves **retention ratio** and reduces **forgetting score**, especially when combined with SI. 
+
+![acc](img/acc.png)
+
    - However, IR also reduces **initial accuracy**, indicating a stability–plasticity trade-off.  
 
 2. **Representation Quality**
 
-![representation_qual](img/representation_qual.png)
+![log_like](img/log_like.png)
 
-   - IR models fit the data better (higher log-likelihood, lower reconstruction error).  
+   - IR models fit the data better (higher log-likelihood, lower reconstruction error).
+
+![umap](img/umap.png)
+
    - But hidden layer embeddings remain **poorly separated**, with **high representational overlap** across tasks.  
 
 4. **Trade-Off Observed**
-
-![trade_off](img/trade_off.png)
 
    - **BIR + SI (w/ IR)** achieves the best long-term stability.  
    - **BIR (w/o IR)** achieves the best short-term plasticity.  
