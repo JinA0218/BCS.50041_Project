@@ -1,4 +1,4 @@
-<img width="850" height="386" alt="image" src="https://github.com/user-attachments/assets/96def260-dacc-422c-ae79-d4ecd8f9cab4" /><img width="850" height="386" alt="image" src="https://github.com/user-attachments/assets/3f32f1f6-6305-46c2-a88c-2d5fede4d838" /># Teaching AI to Remember: Brain-Inspired Replay for Continual Learning
+# Teaching AI to Remember: Brain-Inspired Replay for Continual Learning
 
 Official implementation of **_Teaching AI to Remember: Brain-Inspired Replay for Continual Learning_ [[pdf]](https://drive.google.com/file/d/1HcYfSXhaHh8bmBdXqJt7Jze87Srz868s/view?usp=sharing) [[slide]](https://drive.google.com/file/d/15gnBtbCtdeQ29YvVxPGtNSGcgVPlphpO/view?usp=sharing)**.
 
